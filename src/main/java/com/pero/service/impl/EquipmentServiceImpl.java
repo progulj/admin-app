@@ -54,10 +54,8 @@ public class EquipmentServiceImpl implements IEquipmentService {
 	   
 
 	dataDao.addEquipment(equipment, session, tx);
-	
-	 Equipment equip = dataDao.getEquipmentBySerialNum(equipment.getSerialNumber(), session, tx);
 		
-	 result = true;
+	result = true;
 	 
 	 if (tx!= null && !tx.wasCommitted()) {
 		tx.commit();
@@ -89,8 +87,6 @@ public class EquipmentServiceImpl implements IEquipmentService {
 	try {
 
 	dataDao.updateEquipment(equipment, session, tx);
-	
-	Equipment equip = dataDao.getEquipmentById(equipment.getId(), session, tx);
 	
 	result = true;
 	
