@@ -26,7 +26,7 @@ public class Equipment implements Serializable {
 
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "inventory_number")
