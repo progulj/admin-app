@@ -2,14 +2,12 @@ package com.pero.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -17,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
 @Entity
-@Table(name = "oprema")
+@Table(name = "equipment")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Equipment implements Serializable {
     
@@ -28,39 +26,29 @@ public class Equipment implements Serializable {
 
     
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_OPREMA_ID") 
-    @SequenceGenerator(name="SEQ_OPREMA_ID", sequenceName = "SEQ_OPREMA_ID")
-    @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @Column(name = "inventarni_broj")
+    @Column(name = "inventory_number")
     private String inventoryNumber;
     
-    @Column(name = "model_id")
+    @Column(name = "id_model")
     private long modelId;
     
     
-    @Column(name = "serijski_broj")
+    @Column(name = "serial_number")
     private String serialNumber;
     
-    @Column(name = "dat_nabave")
+    @Column(name = "acquiring_date")
     private Timestamp aquisitionDate;
+
     
-    @Column(name = "dat_istek_jamstva")
-    private Timestamp guaranteeExpiryDate;
-    
-    @Column(name = "status_id")
+    @Column(name = "id_status")
     private long statusId;
           
-    @Column(name = "napomena")
+    @Column(name = "comment")
     private String comment;
-    
-    @Column(name = "licenca")
-    private String licence;
-    
-    @Column(name = "hostname")
-    private String hostname;
-    
+
     @Transient
     private String person;
 
@@ -97,36 +85,12 @@ public class Equipment implements Serializable {
         this.aquisitionDate = aquisitionDate;
     }
 
-    public Timestamp getGuaranteeExpiryDate() {
-        return guaranteeExpiryDate;
-    }
-
-    public void setGuaranteeExpiryDate(Timestamp guaranteeExpiryDate) {
-        this.guaranteeExpiryDate = guaranteeExpiryDate;
-    }
-
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
     }
 
     public long getModelId() {

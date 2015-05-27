@@ -13,9 +13,9 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
-		<property name="url" value="jdbc:postgresql://localhost:5432/hardware_admin" />
-		<property name="username" value="postgres" />
-		<property name="password" value="postgres" />
+		<property name="url" value="jdbc:postgresql://ec2-54-217-202-108.eu-west-1.compute.amazonaws.com/d8sumla79558bh" />
+		<property name="username" value="nalxyosltmlrce" />
+		<property name="password" value="bc2xoFTs_PFHtejuafI1Bt0W_x" />
 		<property name="initialSize" value="15" />
 		<property name="maxActive" value="50" />
 		<property name="maxIdle" value="15" />
