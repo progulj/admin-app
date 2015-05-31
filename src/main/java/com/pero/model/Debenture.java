@@ -30,10 +30,10 @@ public class Debenture implements Serializable {
     private long id;
  
     @Column(name = "id_person")
-    private long personId;
+    private long idPerson;
     
     @Column(name = "id_location")
-    private long locationId;
+    private long idLocation;
     
     @Column(name = "debenture_date")
     private Timestamp debentureDate;
@@ -42,55 +42,57 @@ public class Debenture implements Serializable {
     private Timestamp dischargeDate;
     
     @Column(name = "id_equipment")
-    private long equipmentId;
+    private long idEquipment;
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public long getPersonId() {
-        return personId;
-    }
+	public long getIdPerson() {
+		return idPerson;
+	}
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
-    }
+	public void setIdPerson(long idPerson) {
+		this.idPerson = idPerson;
+	}
 
-    public long getLocationId() {
-        return locationId;
-    }
+	public long getIdLocation() {
+		return idLocation;
+	}
 
-    public void setLocationId(long locationId) {
-        this.locationId = locationId;
-    }
+	public void setIdLocation(long idLocation) {
+		this.idLocation = idLocation;
+	}
 
-    public Timestamp getDebentureDate() {
-        return debentureDate;
-    }
+	public Timestamp getDebentureDate() {
+		return debentureDate;
+	}
 
-    public void setDebentureDate(Timestamp debentureDate) {
-        this.debentureDate = debentureDate;
-    }
+	public void setDebentureDate(Timestamp debentureDate) {
+		this.debentureDate = debentureDate;
+	}
 
-    public Timestamp getDischargeDate() {
-        return dischargeDate;
-    }
+	public Timestamp getDischargeDate() {
+		return dischargeDate;
+	}
 
-    public void setDischargeDate(Timestamp dischargeDate) {
-        this.dischargeDate = dischargeDate;
-    }
+	public void setDischargeDate(Timestamp dischargeDate) {
+		this.dischargeDate = dischargeDate;
+	}
 
-    public long getEquipmentId() {
-        return equipmentId;
-    }
+	public long getIdEquipment() {
+		return idEquipment;
+	}
 
-    public void setEquipmentId(long equipmentId) {
-        this.equipmentId = equipmentId;
-    }
+	public void setIdEquipment(long idEquipment) {
+		this.idEquipment = idEquipment;
+	}
+
+
 
 
 

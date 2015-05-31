@@ -56,18 +56,18 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<Status>  addEquimpent(
 	    @RequestBody Equipment equipment) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    equipmentServices.addEquipment(equipment);
 	    status.setMessage("Equipment added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -76,17 +76,17 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<Status>  editEquipment(
 	    @RequestBody Equipment equipment) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	try {
 	    equipmentServices.updateEquipment(equipment);
 	    status.setMessage("Equipment edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment edit failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -95,32 +95,32 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<EquipmentResponse> getEquipment(
 	    @PathVariable("id") long id) {
 	EquipmentResponse equipment = null;
-	Header header = new Header();
+	
 	try {
 	    equipment = equipmentServices.getEquipmentById(id);
 
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<EquipmentResponse>(equipment,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<EquipmentResponse>(equipment,HttpStatus.BAD_REQUEST);
 	}
-	return new ResponseEntity<EquipmentResponse>(equipment,header,HttpStatus.OK);
+	return new ResponseEntity<EquipmentResponse>(equipment,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<List<EquipmentResponse>> getEquipment() {
 
 	List<EquipmentResponse> equipments= null;
-	Header header = new Header();
+	
 	try {
 	    equipments = equipmentServices.getEquipmentsList();
 
 	} catch (Exception e) {
 	    logger.error(e);
-	    return new ResponseEntity<List<EquipmentResponse>>(equipments,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.BAD_REQUEST);
 	}
 
-	return new ResponseEntity<List<EquipmentResponse>>(equipments,header,HttpStatus.OK);
+	return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.OK);
     }
           
     
@@ -128,17 +128,17 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<List<EquipmentResponse>> getDebentureEquipment() {
 
 	List<EquipmentResponse> equipments= null;
-	Header header = new Header();
+	
 	try {
 	    equipments = equipmentServices.getDebentureEquipmentsList();
 
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<EquipmentResponse>>(equipments,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.BAD_REQUEST);
 	}
 
-	return new ResponseEntity<List<EquipmentResponse>>(equipments,header,HttpStatus.OK);
+	return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.OK);
     }
 
 
@@ -147,16 +147,16 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<EquipmentResponse> getEquipmentSelection() {
 
 	EquipmentResponse equipmentResponse= null;
-	Header header = new Header();
+	
 	try {
 	    equipmentResponse = equipmentServices.getEquipmentSelection();
 
 	} catch (Exception e) {
 	    logger.error(e);
-	    return new ResponseEntity<EquipmentResponse>(equipmentResponse,header,HttpStatus.NO_CONTENT);
+	    return new ResponseEntity<EquipmentResponse>(equipmentResponse,HttpStatus.NO_CONTENT);
 	}
 
-	return new ResponseEntity<EquipmentResponse>(equipmentResponse,header,HttpStatus.OK);
+	return new ResponseEntity<EquipmentResponse>(equipmentResponse,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -182,18 +182,18 @@ public class EquipmentRestController {
     @RequestMapping(value = "/type/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody  ResponseEntity<Status>  addEquimpentType(
 	    @RequestBody EquipmentType equipmentType) {
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    equipmentTypeServices.addEquipmentType(equipmentType);
 	    status.setMessage("Equipment type added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment type add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -202,18 +202,18 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<Status> editEquipmentType(
 	    @RequestBody EquipmentType equipmentType) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    equipmentTypeServices.updateEquipmentType(equipmentType);
 	    status.setMessage("Equipment type edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment type edit failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -237,7 +237,7 @@ public class EquipmentRestController {
 
 	
 	List<EquipmentType> equipmentTypes = null;
-	Header header = new Header();
+	
 	try {
 	    equipmentTypes = equipmentTypeServices.getEquipmentTypesList();
 	    
@@ -245,10 +245,10 @@ public class EquipmentRestController {
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.BAD_REQUEST );
 	}
 
-	return new ResponseEntity<List<EquipmentType>>( equipmentTypes, header, HttpStatus.OK );
+	return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.OK );
     }
     
     @RequestMapping(value = "/type/list/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -256,7 +256,7 @@ public class EquipmentRestController {
 
 	
 	List<EquipmentType> equipmentTypes = null;
-	Header header = new Header();
+	
 	try {
 	    equipmentTypes = equipmentTypeServices.getAllEquipmentTypes();
 	    
@@ -264,10 +264,10 @@ public class EquipmentRestController {
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.BAD_REQUEST );
 	}
 
-	return new ResponseEntity<List<EquipmentType>>( equipmentTypes, header, HttpStatus.OK );
+	return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.OK );
     }
 
     @RequestMapping(value = "/type/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -334,7 +334,7 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<List<EquipmentStatus>> getEquipmentStatus() {
 
 	List<EquipmentStatus> equipmentStatuses = null;
-	Header header = new Header();
+	
 	try {
 	    equipmentStatuses = equipmentStatusServices
 		    .getEquipmentStatusesList();
@@ -342,17 +342,17 @@ public class EquipmentRestController {
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<EquipmentStatus>>( equipmentStatuses, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<List<EquipmentStatus>>( equipmentStatuses,  HttpStatus.BAD_REQUEST );
 	}
 
-	return new ResponseEntity<List<EquipmentStatus>>( equipmentStatuses, header, HttpStatus.OK );
+	return new ResponseEntity<List<EquipmentStatus>>( equipmentStatuses,  HttpStatus.OK );
     }
 
     @RequestMapping(value = "/status/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Response<Object> deleteEquipmentStatus(
 	    @PathVariable("id") long id) {
 
-	Header header = new Header();
+	
 	try {
 	    equipmentStatusServices.deleteEquipmentStatus(id);
 	    return new Response<Object>(200, "Equipment status deleted successfully !");
@@ -373,18 +373,18 @@ public class EquipmentRestController {
     public @ResponseBody ResponseEntity<Status> addEquimpentModel(
 	    @RequestBody EquipmentModel equipmentModel) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    equipmentModelServices.addEquipmentModel(equipmentModel);
 	    status.setMessage("Equipment model added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment model add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -393,18 +393,18 @@ public class EquipmentRestController {
     public @ResponseBody  ResponseEntity<Status> editEquipmentModel(
 	    @RequestBody EquipmentModel equipmentModel) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    equipmentModelServices.updateEquipmentModel(equipmentModel);
 	    status.setMessage("Equipment model edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Equipment model edit failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -429,7 +429,7 @@ public class EquipmentRestController {
 
 	List<EquipmentModel> equipmentModels = null;
 
-	Header header = new Header();
+	
 	try {
 	    equipmentModels = equipmentModelServices
 		    .getEquipmentModelsList();
@@ -438,10 +438,10 @@ public class EquipmentRestController {
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<EquipmentModel>>( equipmentModels, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<List<EquipmentModel>>( equipmentModels,  HttpStatus.BAD_REQUEST );
 	}
 
-	return new ResponseEntity<List<EquipmentModel>>( equipmentModels, header, HttpStatus.OK );
+	return new ResponseEntity<List<EquipmentModel>>( equipmentModels,  HttpStatus.OK );
     }
 
     @RequestMapping(value = "/model/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)

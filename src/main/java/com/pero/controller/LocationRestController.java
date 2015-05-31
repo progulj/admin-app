@@ -33,16 +33,16 @@ public class LocationRestController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Status> addLocation(@RequestBody Location location) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	try {
 	    dataServices.addLocation(location);
 	    status.setMessage("Location added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    status.setMessage("Location add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -50,18 +50,18 @@ public class LocationRestController {
     
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Status> editLocation(@RequestBody Location location) {
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    dataServices.updateLocation(location);
 	    
 	    status.setMessage("Location edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    status.setMessage("Location update failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -70,15 +70,15 @@ public class LocationRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Location> getLocation(@PathVariable("id") long id) {
 	Location location = null;
-	Header header = new Header();
+	
 	try {
 	    location = dataServices.getLocationById(id);
 
 	} catch (Exception e) {
 	    logger.error(e);
-	    return  new ResponseEntity<Location>(location,header,HttpStatus.NO_CONTENT);
+	    return  new ResponseEntity<Location>(location,HttpStatus.NO_CONTENT);
 	}
-	return  new ResponseEntity<Location>(location,header,HttpStatus.OK);
+	return  new ResponseEntity<Location>(location,HttpStatus.OK);
     }
 
     
@@ -86,16 +86,16 @@ public class LocationRestController {
     public @ResponseBody ResponseEntity<List<Location>> getLocation() {
 
 	List<Location> locationList = null;
-	Header header = new Header();
+	
 	try {
 	    locationList = dataServices.getLocationsList();
 
 	} catch (Exception e) {
 	    logger.error(e);
-	    return  new ResponseEntity<List<Location>>(locationList,header,HttpStatus.BAD_REQUEST);
+	    return  new ResponseEntity<List<Location>>(locationList,HttpStatus.BAD_REQUEST);
 	}
 
-	return  new ResponseEntity<List<Location>>(locationList,header,HttpStatus.OK);
+	return  new ResponseEntity<List<Location>>(locationList,HttpStatus.OK);
     }
 
     

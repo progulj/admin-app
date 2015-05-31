@@ -19,7 +19,6 @@ import com.pero.model.response.DebentureResponse;
 import com.pero.model.response.Response;
 import com.pero.model.response.Status;
 import com.pero.service.IDebentureService;
-import com.pero.util.Header;
 
 
 @Controller
@@ -38,18 +37,18 @@ public class DebenetureRestController {
     public @ResponseBody ResponseEntity<List<DebentureResponse>> getDebentureList() {
 
 	List<DebentureResponse> debenetureList = null;
-	Header header = new Header();
+	
 	try {
 	    debenetureList = dataServices.getDebenturesList();
 
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.BAD_REQUEST);
 	    
 	}
 
-	return new ResponseEntity<List<DebentureResponse>>(debenetureList,header,HttpStatus.OK);
+	return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.OK);
     }
 
     
@@ -57,18 +56,18 @@ public class DebenetureRestController {
     public @ResponseBody ResponseEntity<List<DebentureResponse>> getDebentureListByPerson(@PathVariable("id") long id) {
 
 	List<DebentureResponse> debenetureList = null;
-	Header header = new Header();
+	
 	try {
 	    debenetureList = dataServices.getDebenturesList(id);
 
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.BAD_REQUEST);
 	    
 	}
 
-	return new ResponseEntity<List<DebentureResponse>>(debenetureList,header,HttpStatus.OK);
+	return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.OK);
     }
     
     
@@ -85,22 +84,23 @@ public class DebenetureRestController {
 	return  new Response<Debenture>(200,"Person fetched successfully",debeneture);
     }
 
+    
+
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Status>  addEquimpent(
-	    @RequestBody List<Debenture> debentures) {
+    public @ResponseBody ResponseEntity<Status>  addEquimpent(@RequestBody List<Debenture> debentures) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    dataServices.addDebenture(debentures);
 	    status.setMessage("Debenture added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Debenture add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status, HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -109,19 +109,19 @@ public class DebenetureRestController {
     public @ResponseBody ResponseEntity<Status>  editDebenture(
 	    @RequestBody List<Debenture> debentures) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	try {
 	    
 		dataServices.updateDebenture(debentures);
 	    
 	    status.setMessage("Debenture edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Debenture edit failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status, HttpStatus.BAD_REQUEST );
 	}
 
     }

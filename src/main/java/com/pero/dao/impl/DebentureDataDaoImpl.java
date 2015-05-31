@@ -65,10 +65,10 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     public Debenture getDebenture(Debenture debenture, Session session, Transaction tx) throws Exception {
 	
 
-	Query query = session.createQuery("from Debenture where id_equipment =(:serialNum) and id_location = (:locationId)  and person_id =(:personId) and discharge_date is null");
-        query.setParameter("serialNum", debenture.getEquipmentId());
-        query.setParameter("locationId", debenture.getLocationId());
-        query.setParameter("personId", debenture.getPersonId());
+	Query query = session.createQuery("from Debenture where id_equipment =(:serialNum) and id_location = (:locationId)  and id_person =(:personId) and discharge_date is null");
+        query.setParameter("serialNum", debenture.getIdEquipment());
+        query.setParameter("locationId", debenture.getIdLocation());
+        query.setParameter("personId", debenture.getIdPerson());
         
 
         @SuppressWarnings("unchecked")

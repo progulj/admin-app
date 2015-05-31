@@ -78,9 +78,9 @@ public class DebentureServiceImpl implements IDebentureService {
 	    
 	    if(!flag){
 		
-		location = locationDao.getLocationById(debenture.getLocationId(), session, tx);
+		location = locationDao.getLocationById(debenture.getIdLocation(), session, tx);
 		
-		person = personDao.getPersonCroById(debenture.getPersonId(), session, tx);
+		person = personDao.getPersonCroById(debenture.getIdPerson(), session, tx);
 		
 		flag = true;
 	    }
@@ -91,7 +91,7 @@ public class DebentureServiceImpl implements IDebentureService {
 	    Debenture deb = dataDao.getDebenture(debenture, session, tx);
 
 
-	    Equipment equipment = equipmentDao.getEquipmentById(deb.getEquipmentId(), session, tx);
+	    Equipment equipment = equipmentDao.getEquipmentById(deb.getIdEquipment(), session, tx);
 
 	    long statusId = 2;
 
@@ -146,9 +146,9 @@ public class DebentureServiceImpl implements IDebentureService {
 		
 		    if(!flag){
 			
-			location = locationDao.getLocationById(debenture.getLocationId(), session, tx);
+			location = locationDao.getLocationById(debenture.getIdLocation(), session, tx);
 			
-			person = personDao.getPersonCroById(debenture.getPersonId(), session, tx);
+			person = personDao.getPersonCroById(debenture.getIdPerson(), session, tx);
 			
 			flag = true;
 		    }
@@ -162,7 +162,7 @@ public class DebentureServiceImpl implements IDebentureService {
 		deb = dataDao.getDebentureById(debenture.getId(), session, tx);
 
 		Equipment equipment = equipmentDao.getEquipmentById(
-			deb.getEquipmentId(), session, tx);
+			deb.getIdEquipment(), session, tx);
 
 		long statusId = 1;
 
@@ -267,13 +267,13 @@ public class DebentureServiceImpl implements IDebentureService {
 	    	try{
 	    	    	
 	    	    	
-	    	    	Equipment equipment = equipmentDao.getEquipmentById(debenture.getEquipmentId(), session, tx);
+	    	    	Equipment equipment = equipmentDao.getEquipmentById(debenture.getIdEquipment(), session, tx);
 	    	    	
 	    	    	EquipmentStatus eStatus = statuses.get((int)equipment.getStatusId());
 	    	    	EquipmentModel  eModel= models.get((int)equipment.getModelId());
 	    	    	EquipmentType	eType= types.get((int)eModel.getTypeId());
-	    	    	Person  ePerson= persons.get((int)debenture.getPersonId());
-	    	    	Location  eLocation = locations.get((int)debenture.getLocationId());
+	    	    	Person  ePerson= persons.get((int)debenture.getIdPerson());
+	    	    	Location  eLocation = locations.get((int)debenture.getIdLocation());
 	    	    	
 	    	    	
 	    	    	debentureResponse.setDebenture(debenture);
@@ -377,7 +377,7 @@ public class DebentureServiceImpl implements IDebentureService {
 	    	try{
 	    	    	
 	    	    	
-	    	    	Equipment equipment = equipmentDao.getEquipmentById(debenture.getEquipmentId(), session, tx);
+	    	    	Equipment equipment = equipmentDao.getEquipmentById(debenture.getIdEquipment(), session, tx);
 	    	    	
 	    	    	if(equipment.getStatusId() != 2){
 	    	    	    continue;
@@ -386,8 +386,8 @@ public class DebentureServiceImpl implements IDebentureService {
 	    	    	EquipmentStatus eStatus = statuses.get((int)equipment.getStatusId());
 	    	    	EquipmentModel  eModel= models.get((int)equipment.getModelId());
 	    	    	EquipmentType	eType= types.get((int)eModel.getTypeId());
-	    	    	Person  ePerson= persons.get((int)debenture.getPersonId());
-	    	    	Location  eLocation = locations.get((int)debenture.getLocationId());
+	    	    	Person  ePerson= persons.get((int)debenture.getIdPerson());
+	    	    	Location  eLocation = locations.get((int)debenture.getIdLocation());
 	    	    	
 	    	    	
 	    	    	debentureResponse.setDebenture(debenture);

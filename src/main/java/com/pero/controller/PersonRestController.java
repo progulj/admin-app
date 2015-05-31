@@ -48,35 +48,35 @@ public class PersonRestController {
     public @ResponseBody ResponseEntity<List<Person>> getPersonsInternal() {
 
 	List<Person> personList = null;
-	Header header = new Header();
+	
 	try {
 	    personList = dataServices.getPersonsCroList();
 
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
-	    return new ResponseEntity<List<Person>>(personList,header,HttpStatus.BAD_REQUEST);
+	    return new ResponseEntity<List<Person>>(personList,HttpStatus.BAD_REQUEST);
 	    
 	}
 
-	return new ResponseEntity<List<Person>>(personList,header,HttpStatus.OK);
+	return new ResponseEntity<List<Person>>(personList,HttpStatus.OK);
     }
  
     
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Status> addPerson(@RequestBody Person person) {
 	
-	Header header = new Header();
+	
 	Status status = new Status();
 	try {
 	    dataServices.addPerson(person);
 	    status.setMessage("Person added successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Person add failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
@@ -84,19 +84,19 @@ public class PersonRestController {
     
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Status> editPerson(@RequestBody Person person) {
-	Header header = new Header();
+	
 	Status status = new Status();
 	
 	try {
 	    dataServices.updatePerson(person);
 	    
 	    status.setMessage("Person edited successfully !");
-	    return new ResponseEntity<Status>( status ,header, HttpStatus.OK);
+	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
 	    logger.error(e);
 	    e.printStackTrace();
 	    status.setMessage("Person update failed !");
-	    return new ResponseEntity<Status>( status, header, HttpStatus.BAD_REQUEST );
+	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
 
     }
