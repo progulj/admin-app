@@ -2,7 +2,6 @@ package com.pero.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,6 @@ import com.pero.model.Location;
 import com.pero.model.response.Response;
 import com.pero.model.response.Status;
 import com.pero.service.ILocationService;
-import com.pero.util.Header;
 
 @Controller
 @RequestMapping("/location")
@@ -27,7 +25,6 @@ public class LocationRestController {
     @Autowired
     ILocationService dataServices;
 
-    static final Logger logger = Logger.getLogger(LocationRestController.class);
 
    
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +37,7 @@ public class LocationRestController {
 	    status.setMessage("Location added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    status.setMessage("Location add failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
@@ -59,7 +56,7 @@ public class LocationRestController {
 	    status.setMessage("Location edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    status.setMessage("Location update failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
 	}
@@ -75,7 +72,7 @@ public class LocationRestController {
 	    location = dataServices.getLocationById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    return  new ResponseEntity<Location>(location,HttpStatus.NO_CONTENT);
 	}
 	return  new ResponseEntity<Location>(location,HttpStatus.OK);
@@ -91,7 +88,7 @@ public class LocationRestController {
 	    locationList = dataServices.getLocationsList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    return  new ResponseEntity<List<Location>>(locationList,HttpStatus.BAD_REQUEST);
 	}
 
@@ -106,7 +103,7 @@ public class LocationRestController {
 	    dataServices.deleteLocation(id);
 	    return new Response<Object>(200, "Location deleted successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    return new Response<Object>(0, e.toString());
 	}
 

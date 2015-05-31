@@ -2,7 +2,6 @@ package com.pero.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +27,7 @@ public class DebenetureRestController {
     @Autowired
     IDebentureService dataServices;
     
-    static final Logger logger = Logger.getLogger(DebenetureRestController.class);
+   
     
 
 
@@ -42,7 +41,7 @@ public class DebenetureRestController {
 	    debenetureList = dataServices.getDebenturesList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	   
 	    e.printStackTrace();
 	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.BAD_REQUEST);
 	    
@@ -61,7 +60,7 @@ public class DebenetureRestController {
 	    debenetureList = dataServices.getDebenturesList(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    return new ResponseEntity<List<DebentureResponse>>(debenetureList,HttpStatus.BAD_REQUEST);
 	    
@@ -78,7 +77,7 @@ public class DebenetureRestController {
 	    debeneture = dataServices.getDebentureById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    return  new Response<Debenture>(0, e.toString(), debeneture);
 	}
 	return  new Response<Debenture>(200,"Person fetched successfully",debeneture);
@@ -97,7 +96,7 @@ public class DebenetureRestController {
 	    status.setMessage("Debenture added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    status.setMessage("Debenture add failed !");
 	    return new ResponseEntity<Status>( status, HttpStatus.BAD_REQUEST );
@@ -118,7 +117,7 @@ public class DebenetureRestController {
 	    status.setMessage("Debenture edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    status.setMessage("Debenture edit failed !");
 	    return new ResponseEntity<Status>( status, HttpStatus.BAD_REQUEST );

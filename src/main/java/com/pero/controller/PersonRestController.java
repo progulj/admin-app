@@ -2,7 +2,6 @@ package com.pero.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,6 @@ import com.pero.model.Person;
 import com.pero.model.response.Response;
 import com.pero.model.response.Status;
 import com.pero.service.IPersonService;
-import com.pero.util.Header;
 
 
 @Controller
@@ -28,7 +26,7 @@ public class PersonRestController {
     @Autowired
     IPersonService dataServices;
     
-    static final Logger logger = Logger.getLogger(PersonRestController.class);
+    
     
     @RequestMapping(value = "/internal/{id}", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Response<Person> getPersonInternal(@PathVariable("id") long id) {
@@ -37,7 +35,7 @@ public class PersonRestController {
 	    person = dataServices.getPersonCroById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    return  new Response<Person>(0, e.toString(), person);
 	}
 	return  new Response<Person>(200,"Person fetched successfully",person);
@@ -53,7 +51,7 @@ public class PersonRestController {
 	    personList = dataServices.getPersonsCroList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    return new ResponseEntity<List<Person>>(personList,HttpStatus.BAD_REQUEST);
 	    
@@ -73,7 +71,7 @@ public class PersonRestController {
 	    status.setMessage("Person added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    status.setMessage("Person add failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -93,7 +91,7 @@ public class PersonRestController {
 	    status.setMessage("Person edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	    
 	    e.printStackTrace();
 	    status.setMessage("Person update failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );

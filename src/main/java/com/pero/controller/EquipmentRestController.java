@@ -2,7 +2,6 @@ package com.pero.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +24,6 @@ import com.pero.service.IEquipmentModelService;
 import com.pero.service.IEquipmentService;
 import com.pero.service.IEquipmentStatusService;
 import com.pero.service.IEquipmentTypeService;
-import com.pero.util.Header;
 
 @Controller
 @RequestMapping("/equipment")
@@ -43,8 +41,7 @@ public class EquipmentRestController {
     @Autowired
     IEquipmentService equipmentServices;
 
-    static final Logger logger = Logger
-	    .getLogger(EquipmentRestController.class);
+  
 
     // *******************************************************************************************
 
@@ -64,7 +61,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment add failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -83,7 +80,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment edit failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -100,7 +97,7 @@ public class EquipmentRestController {
 	    equipment = equipmentServices.getEquipmentById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<EquipmentResponse>(equipment,HttpStatus.BAD_REQUEST);
 	}
@@ -116,7 +113,7 @@ public class EquipmentRestController {
 	    equipments = equipmentServices.getEquipmentsList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.BAD_REQUEST);
 	}
 
@@ -133,7 +130,7 @@ public class EquipmentRestController {
 	    equipments = equipmentServices.getDebentureEquipmentsList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<List<EquipmentResponse>>(equipments,HttpStatus.BAD_REQUEST);
 	}
@@ -152,7 +149,7 @@ public class EquipmentRestController {
 	    equipmentResponse = equipmentServices.getEquipmentSelection();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new ResponseEntity<EquipmentResponse>(equipmentResponse,HttpStatus.NO_CONTENT);
 	}
 
@@ -166,7 +163,7 @@ public class EquipmentRestController {
 	    equipmentServices.deleteEquipment(id);
 	    return new Response<Object>(200, "Equipment deleted successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
@@ -190,7 +187,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment type added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment type add failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -210,7 +207,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment type edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment type edit failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -226,7 +223,7 @@ public class EquipmentRestController {
 	    equipmentType = equipmentTypeServices.getEquipmentTypeById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<EquipmentType>(0, e.toString(), equipmentType);
 	}
 	return new Response<EquipmentType>(200, "Equipment type fetched successfully !", equipmentType);
@@ -243,7 +240,7 @@ public class EquipmentRestController {
 	    
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.BAD_REQUEST );
 	}
@@ -262,7 +259,7 @@ public class EquipmentRestController {
 	    
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<List<EquipmentType>>( equipmentTypes,  HttpStatus.BAD_REQUEST );
 	}
@@ -277,7 +274,7 @@ public class EquipmentRestController {
 	    equipmentTypeServices.deleteEquipmentType(id);
 	    return new Response<Object>(200, "Equipment type deleted successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
@@ -296,7 +293,7 @@ public class EquipmentRestController {
 	    equipmentStatusServices.addEquipmentStatus(equipmentStatus);
 	    return new Response<Object>(200, "Equipment status added successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
@@ -309,7 +306,7 @@ public class EquipmentRestController {
 	    equipmentStatusServices.updateEquipmentStatus(equipmentStatus);
 	    return new Response<Object>(200, "Equipment status edited successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
@@ -324,7 +321,7 @@ public class EquipmentRestController {
 		    .getEquipmentStatusById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<EquipmentStatus>(0, e.toString(), equipmentStatus);
 	}
 	return new Response<EquipmentStatus>(200, "Equipment status fetched successfully !", equipmentStatus);
@@ -340,7 +337,7 @@ public class EquipmentRestController {
 		    .getEquipmentStatusesList();
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<List<EquipmentStatus>>( equipmentStatuses,  HttpStatus.BAD_REQUEST );
 	}
@@ -357,7 +354,7 @@ public class EquipmentRestController {
 	    equipmentStatusServices.deleteEquipmentStatus(id);
 	    return new Response<Object>(200, "Equipment status deleted successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
@@ -381,7 +378,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment model added successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment model add failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -401,7 +398,7 @@ public class EquipmentRestController {
 	    status.setMessage("Equipment model edited successfully !");
 	    return new ResponseEntity<Status>( status , HttpStatus.OK);
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    status.setMessage("Equipment model edit failed !");
 	    return new ResponseEntity<Status>( status,  HttpStatus.BAD_REQUEST );
@@ -418,7 +415,7 @@ public class EquipmentRestController {
 		    .getEquipmentModelById(id);
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<EquipmentModel>(0, e.toString(), equipmentModel);
 	}
 	return new Response<EquipmentModel>(200, "Equipment model fetched successfully !", equipmentModel);
@@ -436,7 +433,7 @@ public class EquipmentRestController {
 	    
 
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    e.printStackTrace();
 	    return new ResponseEntity<List<EquipmentModel>>( equipmentModels,  HttpStatus.BAD_REQUEST );
 	}
@@ -452,7 +449,7 @@ public class EquipmentRestController {
 	    equipmentModelServices.deleteEquipmentModel(id);
 	    return new Response<Object>(200, "Equipment model deleted successfully !");
 	} catch (Exception e) {
-	    logger.error(e);
+	  
 	    return new Response<Object>(0, e.toString());
 	}
 
