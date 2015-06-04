@@ -130,9 +130,9 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService{
 	    types = dataDao.getEquipmentTypesList(session, tx);
 	    models = modelDao.getEquipmentModelsList(session, tx);
 	    if (types == null || types.size() == 0) {
-		throw new Exception("No types were selected!");
+	    	throw new Exception("No types were selected!");
 	    }
-	    try {
+	   
 		for (EquipmentType type : types) {
 		    List<EquipmentModel> typModels = new ArrayList<EquipmentModel>();
 		    for (EquipmentModel model : models) {
@@ -147,10 +147,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService{
 			retTypes.add(type);
 //		    }
 		}
-	    } catch (Exception e) {
-		e.printStackTrace();
-		throw e;
-	    }
+
 	    
 	    if (tx!= null && !tx.wasCommitted()) {
 		tx.commit();
