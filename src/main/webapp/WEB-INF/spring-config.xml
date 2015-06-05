@@ -16,17 +16,17 @@
 		<property name="url" value="jdbc:postgresql://ec2-54-217-202-108.eu-west-1.compute.amazonaws.com/d8sumla79558bh?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory" />
 		<property name="username" value="nalxyosltmlrce" />
 		<property name="password" value="bc2xoFTs_PFHtejuafI1Bt0W_x" />
-		<property name="initialSize" value="15" />
-		<property name="maxActive" value="50" />
-		<property name="maxIdle" value="15" />
-		<property name="minIdle" value="5" />
+		<property name="initialSize" value="10" />
+		<property name="maxActive" value="350" />
+		<property name="maxIdle" value="250" />
+		<property name="minIdle" value="90" />
 		<property name="maxWait" value="10000" />
 		<property name="minEvictableIdleTimeMillis" value="180000" />
 		<property name="timeBetweenEvictionRunsMillis" value="180000" />
 		<property name="validationQuery" value="SELECT 1 " />
 		<property name="testOnBorrow" value="true" />
 		<property name="removeAbandoned" value="true" />
-		<property name="removeAbandonedTimeout" value="60" />
+		<property name="removeAbandonedTimeout" value="120" />
 		<property name="logAbandoned" value="true" />
 	</bean>
 

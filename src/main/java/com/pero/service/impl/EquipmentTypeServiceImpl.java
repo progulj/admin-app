@@ -14,215 +14,219 @@ import com.pero.model.EquipmentModel;
 import com.pero.model.EquipmentType;
 import com.pero.service.IEquipmentTypeService;
 
-public class EquipmentTypeServiceImpl implements IEquipmentTypeService{
-    
-    @Autowired
-    IEquipmentTypeDataDao dataDao;
-    
-    @Autowired
-    IEquipmentModelDataDao modelDao;
-    
-    @Autowired
-    SessionFactory sessionFactory;
-    
-    Session session = null;
-    Transaction tx = null;
+public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 
-    @Override
-    public boolean addEquipmentType(EquipmentType equipmentType)
-	    throws Exception {
-	boolean result = false;
-	
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
-	
+	@Autowired
+	IEquipmentTypeDataDao dataDao;
 
-	try {
-	    result = dataDao.addEquipmentType(equipmentType, session, tx);
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	    
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
+	@Autowired
+	IEquipmentModelDataDao modelDao;
 
-		session.close();
+	@Autowired
+	SessionFactory sessionFactory;
 
-	    }
-	}
-	return result;
-    }
+	Session session = null;
+	Transaction tx = null;
 
-    @Override
-    public boolean updateEquipmentType(EquipmentType equipmentType)
-	    throws Exception {
-	boolean result = false;
+	@Override
+	public boolean addEquipmentType(EquipmentType equipmentType)
+			throws Exception {
+		boolean result = false;
 
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
 
-	try {
-	    result = dataDao.updateEquipmentType(equipmentType, session, tx);
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	    
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
+		try {
+			result = dataDao.addEquipmentType(equipmentType, session, tx);
 
-		session.close();
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
 
-	    }
-	}
-	return result;
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
 
-    @Override
-    public EquipmentType getEquipmentTypeById(long id) throws Exception {
-	EquipmentType result = null;
-
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
-
-	try {
-	    dataDao.getEquipmentTypeById(id, session, tx);
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
-
-		session.close();
-
-	    }
-	}
-
-	return result;
-    }
-
-    @Override
-    public List<EquipmentType> getEquipmentTypesList() throws Exception {
-
-	List<EquipmentType> types = new ArrayList<EquipmentType>();
-	List<EquipmentType> retTypes = new ArrayList<EquipmentType>();
-	List<EquipmentModel> models = new ArrayList<EquipmentModel>();
-
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
-
-	try {
-
-	    types = dataDao.getEquipmentTypesList(session, tx);
-	    models = modelDao.getEquipmentModelsList(session, tx);
-	    if (types == null || types.size() == 0) {
-	    	throw new Exception("No types were selected!");
-	    }
-	   
-		for (EquipmentType type : types) {
-		    List<EquipmentModel> typModels = new ArrayList<EquipmentModel>();
-		    for (EquipmentModel model : models) {
-
-			if (type.getId() == model.getTypeId()) {
-			    typModels.add(model);
+				session.close();
 
 			}
-		    }
-		    type.setModels(typModels);
-//		    if (typModels != null && typModels.size() > 0) {
-			retTypes.add(type);
-//		    }
+		}
+		return result;
+	}
+
+	@Override
+	public boolean updateEquipmentType(EquipmentType equipmentType)
+			throws Exception {
+		boolean result = false;
+
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
+
+		try {
+			result = dataDao.updateEquipmentType(equipmentType, session, tx);
+
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
+
+				session.close();
+
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public EquipmentType getEquipmentTypeById(long id) throws Exception {
+		EquipmentType result = null;
+
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
+
+		try {
+			dataDao.getEquipmentTypeById(id, session, tx);
+
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
+
+				session.close();
+
+			}
 		}
 
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	    
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
-
-		session.close();
-
-	    }
+		return result;
 	}
 
-	return retTypes;
-    }
+	@Override
+	public List<EquipmentType> getEquipmentTypesList() throws Exception {
 
-    @Override
-    public List<EquipmentType> getAllEquipmentTypes() throws Exception {
-	List<EquipmentType> result = null;
+		List<EquipmentType> types = new ArrayList<EquipmentType>();
+		List<EquipmentType> retTypes = new ArrayList<EquipmentType>();
+		List<EquipmentModel> models = new ArrayList<EquipmentModel>();
 
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
 
-	try {
-	    result = dataDao.getEquipmentTypesList(session, tx);
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
+		try {
 
-		session.close();
+			types = dataDao.getEquipmentTypesList(session, tx);
+			models = modelDao.getEquipmentModelsList(session, tx);
+			if (types == null || types.size() == 0) {
+				throw new Exception("No types were selected!");
+			}
 
-	    }
+			for (EquipmentType type : types) {
+				List<EquipmentModel> typModels = new ArrayList<EquipmentModel>();
+				for (EquipmentModel model : models) {
+
+					if (type.getId() == model.getTypeId()) {
+						typModels.add(model);
+
+					}
+				}
+				type.setModels(typModels);
+				// if (typModels != null && typModels.size() > 0) {
+				retTypes.add(type);
+				// }
+			}
+
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive())
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
+
+				session.close();
+
+			}
+		}
+
+		return retTypes;
 	}
 
-	return result;
-    }
+	@Override
+	public List<EquipmentType> getAllEquipmentTypes() throws Exception {
+		List<EquipmentType> result = null;
 
-    @Override
-    public boolean deleteEquipmentType(long id) throws Exception {
-	boolean result = false;
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
 
-	session = sessionFactory.openSession();
-	tx = session.beginTransaction();
+		try {
+			result = dataDao.getEquipmentTypesList(session, tx);
 
-	try {
-	    result =dataDao.deleteEquipmentType(id, session, tx);
-	    
-	    if (tx!= null && !tx.wasCommitted()) {
-		tx.commit();
-	    }
-	    
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    if (tx!=null) tx.rollback();
-	    throw e;
-	} finally {
-	    if (session != null && session.isOpen()) {
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive())
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
 
-		session.close();
+				session.close();
 
-	    }
+			}
+		}
+
+		return result;
 	}
 
-	return result;
-    }
+	@Override
+	public boolean deleteEquipmentType(long id) throws Exception {
+		boolean result = false;
+
+		session = sessionFactory.openSession();
+		tx = session.beginTransaction();
+
+		try {
+			result = dataDao.deleteEquipmentType(id, session, tx);
+
+			if (tx != null && !tx.wasCommitted()) {
+				tx.commit();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			if (session != null && session.isOpen()) {
+
+				session.close();
+
+			}
+		}
+
+		return result;
+	}
 
 }
