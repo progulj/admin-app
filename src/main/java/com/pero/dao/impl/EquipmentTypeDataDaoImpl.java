@@ -3,7 +3,6 @@ package com.pero.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.IEquipmentTypeDataDao;
 import com.pero.model.EquipmentType;
@@ -13,7 +12,7 @@ public class EquipmentTypeDataDaoImpl implements IEquipmentTypeDataDao {
 
 
     @Override
-    public boolean addEquipmentType(EquipmentType equipmentType, Session session, Transaction tx)
+    public boolean addEquipmentType(EquipmentType equipmentType, Session session)
 	    throws Exception {
 
 	session.save(equipmentType);
@@ -23,7 +22,7 @@ public class EquipmentTypeDataDaoImpl implements IEquipmentTypeDataDao {
     }
 
     @Override
-    public boolean updateEquipmentType(EquipmentType equipmentType,Session session, Transaction tx)
+    public boolean updateEquipmentType(EquipmentType equipmentType,Session session)
 	    throws Exception {
 
 
@@ -34,7 +33,7 @@ public class EquipmentTypeDataDaoImpl implements IEquipmentTypeDataDao {
     }
 
     @Override
-    public EquipmentType getEquipmentTypeById(long id, Session session, Transaction tx) throws Exception {
+    public EquipmentType getEquipmentTypeById(long id, Session session) throws Exception {
 	
 	
 
@@ -53,7 +52,7 @@ public class EquipmentTypeDataDaoImpl implements IEquipmentTypeDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<EquipmentType> getEquipmentTypesList(Session session, Transaction tx) throws Exception {
+    public List<EquipmentType> getEquipmentTypesList(Session session) throws Exception {
 
 
 	
@@ -70,7 +69,7 @@ public class EquipmentTypeDataDaoImpl implements IEquipmentTypeDataDao {
     }
 
     @Override
-    public boolean deleteEquipmentType(long id,Session session, Transaction tx) throws Exception {
+    public boolean deleteEquipmentType(long id,Session session) throws Exception {
 
 
 

@@ -32,14 +32,14 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.addEquipmentStatus(equipmentStatus, session, tx);
+			result = dataDao.addEquipmentStatus(equipmentStatus, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -63,7 +63,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		try {
 			result = dataDao
-					.updateEquipmentStatus(equipmentStatus, session, tx);
+					.updateEquipmentStatus(equipmentStatus, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -71,7 +71,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -95,14 +95,14 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.getEquipmentStatusById(id, session, tx);
+			result = dataDao.getEquipmentStatusById(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -126,8 +126,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		try {
 
-			result = dataDao.getEquipmentStatusesListWithoutStatusTwo(session,
-					tx);
+			result = dataDao.getEquipmentStatusesListWithoutStatusTwo(session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -135,7 +134,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -159,7 +158,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		try {
 
-			result = dataDao.deleteEquipmentStatus(id, session, tx);
+			result = dataDao.deleteEquipmentStatus(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -167,7 +166,7 @@ public class EquipmentStatusServiceImpl implements IEquipmentStatusService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

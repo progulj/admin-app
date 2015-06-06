@@ -30,7 +30,7 @@ public class LocationServiceImpl implements ILocationService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.addLocation(location, session, tx);
+			result = dataDao.addLocation(location, session);
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
@@ -57,13 +57,13 @@ public class LocationServiceImpl implements ILocationService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.updateLocation(location, session, tx);
+			result = dataDao.updateLocation(location, session);
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -84,14 +84,14 @@ public class LocationServiceImpl implements ILocationService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.getLocationById(id, session, tx);
+			result = dataDao.getLocationById(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -112,7 +112,7 @@ public class LocationServiceImpl implements ILocationService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.getLocationsList(session, tx);
+			result = dataDao.getLocationsList(session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -120,7 +120,7 @@ public class LocationServiceImpl implements ILocationService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -141,13 +141,13 @@ public class LocationServiceImpl implements ILocationService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.deleteLocation(id, session, tx);
+			result = dataDao.deleteLocation(id, session);
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

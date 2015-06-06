@@ -51,7 +51,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		try {
 
-			dataDao.addEquipment(equipment, session, tx);
+			dataDao.addEquipment(equipment, session);
 
 			result = true;
 
@@ -60,7 +60,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -84,7 +84,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		try {
 
-			dataDao.updateEquipment(equipment, session, tx);
+			dataDao.updateEquipment(equipment, session);
 
 			result = true;
 
@@ -93,7 +93,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -117,27 +117,26 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		try {
 
-			Equipment equipment = dataDao.getEquipmentById(id, session, tx);
+			Equipment equipment = dataDao.getEquipmentById(id, session);
 
 			EquipmentModel equipmentModel = modelDao.getEquipmentModelById(
-					equipment.getModelId(), session, tx);
+					equipment.getModelId(), session);
 
 			EquipmentStatus equipmentStatus = satatusDao
-					.getEquipmentStatusById(equipment.getStatusId(), session,
-							tx);
+					.getEquipmentStatusById(equipment.getStatusId(), session);
 
 			equipmentResponse.setEquipment(equipment);
 			equipmentResponse.setEquipmentStatus(equipmentStatus);
 			equipmentResponse.setEquipmentModel(equipmentModel);
 			equipmentResponse.setEquipmentType(typeDao.getEquipmentTypeById(
-					equipmentModel.getTypeId(), session, tx));
+					equipmentModel.getTypeId(), session));
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -162,7 +161,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		try {
 
-			List<Equipment> equipments = dataDao.getEquipmentsList(session, tx);
+			List<Equipment> equipments = dataDao.getEquipmentsList(session);
 
 			if (equipments == null || equipments.size() == 0) {
 
@@ -176,19 +175,19 @@ public class EquipmentServiceImpl implements IEquipmentService {
 			Map<Integer, EquipmentType> types = new HashMap<Integer, EquipmentType>();
 
 			for (EquipmentModel model : modelDao.getEquipmentModelsList(
-					session, tx)) {
+					session)) {
 
 				models.put((int) model.getId(), model);
 			}
 
 			for (EquipmentStatus status : satatusDao.getEquipmentStatusesList(
-					session, tx)) {
+					session)) {
 
 				statuses.put((int) status.getId(), status);
 			}
 
 			for (EquipmentType type : typeDao
-					.getEquipmentTypesList(session, tx)) {
+					.getEquipmentTypesList(session)) {
 
 				types.put((int) type.getId(), type);
 			}
@@ -223,7 +222,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -250,7 +249,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 			long statusID = 1;
 			List<Equipment> equipments = dataDao.getEquipmentByStatusList(
-					session, tx, statusID);
+					session, statusID);
 
 			if (equipments == null || equipments.size() == 0) {
 
@@ -264,19 +263,19 @@ public class EquipmentServiceImpl implements IEquipmentService {
 			Map<Integer, EquipmentType> types = new HashMap<Integer, EquipmentType>();
 
 			for (EquipmentModel model : modelDao.getEquipmentModelsList(
-					session, tx)) {
+					session)) {
 
 				models.put((int) model.getId(), model);
 			}
 
 			for (EquipmentStatus status : satatusDao.getEquipmentStatusesList(
-					session, tx)) {
+					session)) {
 
 				statuses.put((int) status.getId(), status);
 			}
 
 			for (EquipmentType type : typeDao
-					.getEquipmentTypesList(session, tx)) {
+					.getEquipmentTypesList(session)) {
 
 				types.put((int) type.getId(), type);
 			}
@@ -311,7 +310,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -336,11 +335,10 @@ public class EquipmentServiceImpl implements IEquipmentService {
 		try {
 
 			List<EquipmentModel> models = modelDao.getEquipmentModelsList(
-					session, tx);
+					session);
 			List<EquipmentStatus> statuses = satatusDao
-					.getEquipmentStatusesList(session, tx);
-			List<EquipmentType> types = typeDao.getEquipmentTypesList(session,
-					tx);
+					.getEquipmentStatusesList(session);
+			List<EquipmentType> types = typeDao.getEquipmentTypesList(session);
 
 			equipmentResponse.setEquipmentsModels(models);
 			equipmentResponse.setEquipmentsStatuses(statuses);
@@ -352,7 +350,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -375,7 +373,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.deleteEquipment(id, session, tx);
+			result = dataDao.deleteEquipment(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -383,7 +381,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

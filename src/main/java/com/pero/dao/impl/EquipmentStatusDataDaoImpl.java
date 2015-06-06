@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.IEquipmentStatusDataDao;
 import com.pero.model.EquipmentStatus;
@@ -13,7 +12,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
 
 
     @Override
-    public boolean addEquipmentStatus(EquipmentStatus equimpentStatus,Session session, Transaction tx)
+    public boolean addEquipmentStatus(EquipmentStatus equimpentStatus,Session session)
 	    throws Exception {
 	
 	session.save(equimpentStatus);
@@ -23,7 +22,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
     }
 
     @Override
-    public boolean updateEquipmentStatus(EquipmentStatus equimpentStatus,Session session, Transaction tx)
+    public boolean updateEquipmentStatus(EquipmentStatus equimpentStatus,Session session)
 	    throws Exception {
 
 
@@ -33,7 +32,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
     }
 
     @Override
-    public EquipmentStatus getEquipmentStatusById(long id,Session session, Transaction tx) throws Exception {
+    public EquipmentStatus getEquipmentStatusById(long id,Session session) throws Exception {
 
 	
 
@@ -50,7 +49,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<EquipmentStatus> getEquipmentStatusesList(Session session, Transaction tx) throws Exception {
+    public List<EquipmentStatus> getEquipmentStatusesList(Session session) throws Exception {
 
 	List<EquipmentStatus> equimpentStatus = session.createCriteria(
 		EquipmentStatus.class).list();
@@ -60,7 +59,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<EquipmentStatus> getEquipmentStatusesListWithoutStatusTwo(Session session, Transaction tx)
+    public List<EquipmentStatus> getEquipmentStatusesListWithoutStatusTwo(Session session)
 	    throws Exception {
 
 	long statusId = 2;
@@ -77,7 +76,7 @@ public class EquipmentStatusDataDaoImpl implements IEquipmentStatusDataDao {
     }
 
     @Override
-    public boolean deleteEquipmentStatus(long id,Session session, Transaction tx) throws Exception {
+    public boolean deleteEquipmentStatus(long id,Session session) throws Exception {
 
 	Object o = session.get(EquipmentStatus.class, id);
 

@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.IDebentureDataDao;
 import com.pero.model.Debenture;
@@ -15,7 +14,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     
 
     @Override
-    public long addDebenture(Debenture debenture, Session session, Transaction tx) throws Exception {
+    public long addDebenture(Debenture debenture, Session session) throws Exception {
 	
 	
 	
@@ -27,7 +26,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     }
 
     @Override
-    public boolean updateDebenture(Debenture debenture, Session session, Transaction tx) throws Exception {
+    public boolean updateDebenture(Debenture debenture, Session session) throws Exception {
 
 	session.update(debenture);
 
@@ -35,7 +34,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     }
 
     @Override
-    public Debenture getDebentureById(long id, Session session, Transaction tx) throws Exception {
+    public Debenture getDebentureById(long id, Session session) throws Exception {
 	
 
 	
@@ -48,7 +47,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     }
 
     @Override
-    public List<Debenture> getDebenturesList(Session session, Transaction tx) throws Exception {
+    public List<Debenture> getDebenturesList(Session session) throws Exception {
 
 	Criteria criteria = session.createCriteria(Debenture.class);
 	
@@ -62,7 +61,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
  
 
     @Override
-    public Debenture getDebenture(Debenture debenture, Session session, Transaction tx) throws Exception {
+    public Debenture getDebenture(Debenture debenture, Session session) throws Exception {
 	
 
 	Query query = session.createQuery("from Debenture where id_equipment =(:serialNum) and id_location = (:locationId)  and id_person =(:personId) and discharge_date is null");
@@ -82,7 +81,7 @@ public class DebentureDataDaoImpl implements IDebentureDataDao{
     }
 
     @Override
-    public List<Debenture> getDebenturesList(long id, Session session, Transaction tx) throws Exception {
+    public List<Debenture> getDebenturesList(long id, Session session) throws Exception {
 	
 
 	Query query = session.createQuery("from Debenture where id_person in(:personId) and discharge_date is null");

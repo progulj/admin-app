@@ -3,7 +3,6 @@ package com.pero.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.IEquipmentModelDataDao;
 import com.pero.model.EquipmentModel;
@@ -12,7 +11,7 @@ public class EquipmentModelDataDaoImpl implements IEquipmentModelDataDao {
 
 
     @Override
-    public boolean addEquipmentModel(EquipmentModel equipmentModel, Session session, Transaction tx)
+    public boolean addEquipmentModel(EquipmentModel equipmentModel, Session session)
 	    throws Exception {
 
 	session.save(equipmentModel);
@@ -21,7 +20,7 @@ public class EquipmentModelDataDaoImpl implements IEquipmentModelDataDao {
     }
 
     @Override
-    public boolean updateEquipmentModel(EquipmentModel equipmentModel, Session session, Transaction tx)
+    public boolean updateEquipmentModel(EquipmentModel equipmentModel, Session session)
 	    throws Exception {
 
 
@@ -34,7 +33,7 @@ public class EquipmentModelDataDaoImpl implements IEquipmentModelDataDao {
     }
 
     @Override
-    public EquipmentModel getEquipmentModelById(long id, Session session, Transaction tx) throws Exception {
+    public EquipmentModel getEquipmentModelById(long id, Session session) throws Exception {
 	
 	
 	EquipmentModel equipmentModel = null;
@@ -52,7 +51,7 @@ public class EquipmentModelDataDaoImpl implements IEquipmentModelDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<EquipmentModel> getEquipmentModelsList( Session session, Transaction tx) throws Exception {
+    public List<EquipmentModel> getEquipmentModelsList( Session session) throws Exception {
 
 	
 	List<EquipmentModel> equipmentModel = null;
@@ -66,7 +65,7 @@ public class EquipmentModelDataDaoImpl implements IEquipmentModelDataDao {
     }
 
     @Override
-    public boolean deleteEquipmentModel(long id, Session session, Transaction tx)  throws Exception {
+    public boolean deleteEquipmentModel(long id, Session session)  throws Exception {
 
 	
 	Object o = session.get(EquipmentModel.class, id);

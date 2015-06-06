@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -17,7 +16,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
  
 
     @Override
-    public boolean addEquipment(Equipment  equipment, Session session, Transaction tx)
+    public boolean addEquipment(Equipment  equipment, Session session)
 	    throws Exception {
 
 	
@@ -31,7 +30,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
 
 
     @Override
-    public boolean updateEquipment(Equipment  equipment, Session session, Transaction tx)
+    public boolean updateEquipment(Equipment  equipment, Session session)
 	    throws Exception {
 
 
@@ -42,7 +41,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
     }
 
     @Override
-    public Equipment getEquipmentBySerialNum(String serialNum,Session session, Transaction tx) throws Exception {
+    public Equipment getEquipmentBySerialNum(String serialNum,Session session) throws Exception {
 
 
 
@@ -62,7 +61,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
 
     
     @Override
-    public Equipment  getEquipmentById(long id,Session session, Transaction tx) throws Exception {
+    public Equipment  getEquipmentById(long id,Session session) throws Exception {
 
 	
 	Equipment equipment = (Equipment)session.get(Equipment.class, id);
@@ -76,7 +75,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
     
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<Equipment > getEquipmentsList(Session session, Transaction tx) throws Exception {
+    public List<Equipment > getEquipmentsList(Session session) throws Exception {
 
 
 	Criteria criteria = session.createCriteria(Equipment.class);
@@ -92,7 +91,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
     
         @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<Equipment>  getEquipmentByStatusList(Session session, Transaction tx, long statusID) throws Exception {
+    public List<Equipment>  getEquipmentByStatusList(Session session, long statusID) throws Exception {
 
          
    
@@ -105,7 +104,7 @@ public class EquipmentDataDaoImpl implements IEquipmentDataDao {
     }
 
     @Override
-    public boolean deleteEquipment (String id, Session session, Transaction tx) throws Exception {
+    public boolean deleteEquipment (String id, Session session) throws Exception {
 
 
 	Object o = session.get(Equipment.class, id);

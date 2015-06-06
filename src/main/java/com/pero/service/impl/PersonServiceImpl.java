@@ -30,7 +30,7 @@ public class PersonServiceImpl implements IPersonService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.getPersonCroById(id, session, tx);
+			result = dataDao.getPersonCroById(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -38,7 +38,7 @@ public class PersonServiceImpl implements IPersonService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -59,14 +59,14 @@ public class PersonServiceImpl implements IPersonService {
 		session = sessionFactory.openSession();
 		tx = session.beginTransaction();
 		try {
-			result = dataDao.getPersonsCroList(session, tx);
+			result = dataDao.getPersonsCroList(session);
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -91,14 +91,14 @@ public class PersonServiceImpl implements IPersonService {
 
 			person.setPerson(person.getLastName() + " " + person.getFirstName());
 
-			result = dataDao.addPerson(person, session, tx);
+			result = dataDao.addPerson(person, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -122,7 +122,7 @@ public class PersonServiceImpl implements IPersonService {
 		try {
 			person.setPerson(person.getLastName() + " " + person.getFirstName());
 
-			result = dataDao.updatePerson(person, session, tx);
+			result = dataDao.updatePerson(person, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -130,7 +130,7 @@ public class PersonServiceImpl implements IPersonService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

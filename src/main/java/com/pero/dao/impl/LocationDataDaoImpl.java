@@ -3,7 +3,6 @@ package com.pero.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.ILocationDataDao;
 import com.pero.model.Location;
@@ -13,7 +12,7 @@ public class LocationDataDaoImpl implements ILocationDataDao {
   
 
     @Override
-    public boolean addLocation(Location location, Session session, Transaction tx) throws Exception {
+    public boolean addLocation(Location location, Session session) throws Exception {
 
 
 	session.save(location);
@@ -23,7 +22,7 @@ public class LocationDataDaoImpl implements ILocationDataDao {
     }
 
     @Override
-    public boolean updateLocation(Location location, Session session, Transaction tx) throws Exception {
+    public boolean updateLocation(Location location, Session session) throws Exception {
 
 
 	session.update(location);
@@ -32,7 +31,7 @@ public class LocationDataDaoImpl implements ILocationDataDao {
     }
 
     @Override
-    public Location getLocationById(long id, Session session, Transaction tx) throws Exception {
+    public Location getLocationById(long id, Session session) throws Exception {
 
 
 	Location location = (Location) session
@@ -46,7 +45,7 @@ public class LocationDataDaoImpl implements ILocationDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<Location> getLocationsList(Session session, Transaction tx) throws Exception {
+    public List<Location> getLocationsList(Session session) throws Exception {
 
 	List<Location> locationList = session.createCriteria(Location.class)
 		.list();
@@ -56,7 +55,7 @@ public class LocationDataDaoImpl implements ILocationDataDao {
     }
 
     @Override
-    public boolean deleteLocation(long id, Session session, Transaction tx) throws Exception {
+    public boolean deleteLocation(long id, Session session) throws Exception {
 
 	Object o = session.get(Location.class, id);
 

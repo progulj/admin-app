@@ -3,7 +3,6 @@ package com.pero.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.pero.dao.IPersonDataDao;
 import com.pero.model.Person;
@@ -13,7 +12,7 @@ public class PersonDataDaoImpl implements IPersonDataDao {
 
 
     @Override
-    public Person getPersonCroById(long id,Session session, Transaction tx) throws Exception {
+    public Person getPersonCroById(long id,Session session) throws Exception {
 
 
 	Person person = (Person) session.get(Person.class,
@@ -29,7 +28,7 @@ public class PersonDataDaoImpl implements IPersonDataDao {
 
     @SuppressWarnings(value = { "unchecked" })
     @Override
-    public List<Person> getPersonsCroList(Session session, Transaction tx) throws Exception {
+    public List<Person> getPersonsCroList(Session session) throws Exception {
 
 	List<Person> persons = session.createCriteria(Person.class)
 		.list();
@@ -41,7 +40,7 @@ public class PersonDataDaoImpl implements IPersonDataDao {
 
 
     @Override
-    public boolean addPerson(Person person,Session session, Transaction tx) throws Exception {
+    public boolean addPerson(Person person,Session session) throws Exception {
 
 	session.save(person);
 
@@ -49,7 +48,7 @@ public class PersonDataDaoImpl implements IPersonDataDao {
     }
 
     @Override
-    public boolean updatePerson(Person person,Session session, Transaction tx) throws Exception {
+    public boolean updatePerson(Person person,Session session) throws Exception {
 
 	session.update(person);
 

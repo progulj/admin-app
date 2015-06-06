@@ -37,7 +37,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.addEquipmentType(equipmentType, session, tx);
+			result = dataDao.addEquipmentType(equipmentType, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -45,7 +45,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -67,7 +67,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.updateEquipmentType(equipmentType, session, tx);
+			result = dataDao.updateEquipmentType(equipmentType, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -75,7 +75,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -96,14 +96,14 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 		tx = session.beginTransaction();
 
 		try {
-			dataDao.getEquipmentTypeById(id, session, tx);
+			dataDao.getEquipmentTypeById(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -129,8 +129,8 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 
 		try {
 
-			types = dataDao.getEquipmentTypesList(session, tx);
-			models = modelDao.getEquipmentModelsList(session, tx);
+			types = dataDao.getEquipmentTypesList(session);
+			models = modelDao.getEquipmentModelsList(session);
 			if (types == null || types.size() == 0) {
 				throw new Exception("No types were selected!");
 			}
@@ -178,7 +178,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.getEquipmentTypesList(session, tx);
+			result = dataDao.getEquipmentTypesList(session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -207,7 +207,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.deleteEquipmentType(id, session, tx);
+			result = dataDao.deleteEquipmentType(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -215,7 +215,7 @@ public class EquipmentTypeServiceImpl implements IEquipmentTypeService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

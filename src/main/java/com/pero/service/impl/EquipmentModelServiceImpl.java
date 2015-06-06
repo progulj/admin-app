@@ -38,7 +38,7 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.addEquipmentModel(equipmentModel, session, tx);
+			result = dataDao.addEquipmentModel(equipmentModel, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -46,7 +46,7 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -68,14 +68,14 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 		tx = session.beginTransaction();
 
 		try {
-			result = dataDao.updateEquipmentModel(equipmentModel, session, tx);
+			result = dataDao.updateEquipmentModel(equipmentModel, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -97,14 +97,14 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 
 		try {
 
-			result = dataDao.getEquipmentModelById(id, session, tx);
+			result = dataDao.getEquipmentModelById(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -132,8 +132,8 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 			List<EquipmentType> types = new ArrayList<EquipmentType>();
 			List<EquipmentModel> models = new ArrayList<EquipmentModel>();
 
-			types = typeDao.getEquipmentTypesList(session, tx);
-			models = dataDao.getEquipmentModelsList(session, tx);
+			types = typeDao.getEquipmentTypesList(session);
+			models = dataDao.getEquipmentModelsList(session);
 
 			if (models == null || models.size() == 0) {
 				throw new Exception("No models were selected!");
@@ -158,7 +158,7 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -181,7 +181,7 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 
 		try {
 
-			result = dataDao.deleteEquipmentModel(id, session, tx);
+			result = dataDao.deleteEquipmentModel(id, session);
 
 			if (tx != null && !tx.wasCommitted()) {
 				tx.commit();
@@ -189,7 +189,7 @@ public class EquipmentModelServiceImpl implements IEquipmentModelService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {

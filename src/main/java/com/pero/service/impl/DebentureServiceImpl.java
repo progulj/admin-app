@@ -76,28 +76,28 @@ public class DebentureServiceImpl implements IDebentureService {
 				if (!flag) {
 
 					location = locationDao.getLocationById(
-							debenture.getIdLocation(), session, tx);
+							debenture.getIdLocation(), session);
 
 					person = personDao.getPersonCroById(
-							debenture.getIdPerson(), session, tx);
+							debenture.getIdPerson(), session);
 
 					flag = true;
 				}
 
 				debenture.setDebentureDate(new Timestamp(System
 						.currentTimeMillis()));
-				dataDao.addDebenture(debenture, session, tx);
+				dataDao.addDebenture(debenture, session);
 
-				Debenture deb = dataDao.getDebenture(debenture, session, tx);
+				Debenture deb = dataDao.getDebenture(debenture, session);
 
 				Equipment equipment = equipmentDao.getEquipmentById(
-						deb.getIdEquipment(), session, tx);
+						deb.getIdEquipment(), session);
 
 				long statusId = 2;
 
 				equipment.setStatusId(statusId);
 
-				equipmentDao.updateEquipment(equipment, session, tx);
+				equipmentDao.updateEquipment(equipment, session);
 
 			}
 
@@ -109,7 +109,7 @@ public class DebentureServiceImpl implements IDebentureService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -142,36 +142,36 @@ public class DebentureServiceImpl implements IDebentureService {
 				if (!flag) {
 
 					location = locationDao.getLocationById(
-							debenture.getIdLocation(), session, tx);
+							debenture.getIdLocation(), session);
 
 					person = personDao.getPersonCroById(
-							debenture.getIdPerson(), session, tx);
+							debenture.getIdPerson(), session);
 
 					flag = true;
 				}
 				Debenture deb = dataDao.getDebentureById(debenture.getId(),
-						session, tx);
+						session);
 
 				deb.setDischargeDate(new Timestamp(System.currentTimeMillis()));
 
-				dataDao.updateDebenture(deb, session, tx);
+				dataDao.updateDebenture(deb, session);
 
-				deb = dataDao.getDebentureById(debenture.getId(), session, tx);
+				deb = dataDao.getDebentureById(debenture.getId(), session);
 
 				Equipment equipment = equipmentDao.getEquipmentById(
-						deb.getIdEquipment(), session, tx);
+						deb.getIdEquipment(), session);
 
 				long statusId = 1;
 
 				equipment.setStatusId(statusId);
 
-				equipmentDao.updateEquipment(equipment, session, tx);
+				equipmentDao.updateEquipment(equipment, session);
 
 				EquipmentModel equipmentModel = modelDao.getEquipmentModelById(
-						equipment.getModelId(), session, tx);
+						equipment.getModelId(), session);
 
 				EquipmentType equipmentType = typeDao.getEquipmentTypeById(
-						equipmentModel.getTypeId(), session, tx);
+						equipmentModel.getTypeId(), session);
 
 			}
 
@@ -183,7 +183,7 @@ public class DebentureServiceImpl implements IDebentureService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -213,7 +213,7 @@ public class DebentureServiceImpl implements IDebentureService {
 
 		try {
 
-			List<Debenture> debentures = dataDao.getDebenturesList(session, tx);
+			List<Debenture> debentures = dataDao.getDebenturesList(session);
 
 			if (debentures == null || debentures.size() == 0) {
 
@@ -231,29 +231,29 @@ public class DebentureServiceImpl implements IDebentureService {
 			Map<Integer, Person> persons = new HashMap<Integer, Person>();
 
 			for (EquipmentModel model : modelDao.getEquipmentModelsList(
-					session, tx)) {
+					session)) {
 
 				models.put((int) model.getId(), model);
 			}
 
 			for (EquipmentStatus status : satatusDao.getEquipmentStatusesList(
-					session, tx)) {
+					session)) {
 
 				statuses.put((int) status.getId(), status);
 			}
 
 			for (EquipmentType type : typeDao
-					.getEquipmentTypesList(session, tx)) {
+					.getEquipmentTypesList(session)) {
 
 				types.put((int) type.getId(), type);
 			}
 
-			for (Location location : locationDao.getLocationsList(session, tx)) {
+			for (Location location : locationDao.getLocationsList(session)) {
 
 				locations.put((int) location.getId(), location);
 			}
 
-			for (Person person : personDao.getPersonsCroList(session, tx)) {
+			for (Person person : personDao.getPersonsCroList(session)) {
 
 				persons.put((int) person.getId(), person);
 			}
@@ -264,7 +264,7 @@ public class DebentureServiceImpl implements IDebentureService {
 				try {
 
 					Equipment equipment = equipmentDao.getEquipmentById(
-							debenture.getIdEquipment(), session, tx);
+							debenture.getIdEquipment(), session);
 
 					EquipmentStatus eStatus = statuses.get((int) equipment
 							.getStatusId());
@@ -296,7 +296,7 @@ public class DebentureServiceImpl implements IDebentureService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
@@ -327,8 +327,7 @@ public class DebentureServiceImpl implements IDebentureService {
 
 		try {
 
-			List<Debenture> debentures = dataDao.getDebenturesList(id, session,
-					tx);
+			List<Debenture> debentures = dataDao.getDebenturesList(id, session);
 
 			if (debentures == null || debentures.size() == 0) {
 
@@ -346,29 +345,29 @@ public class DebentureServiceImpl implements IDebentureService {
 			Map<Integer, Person> persons = new HashMap<Integer, Person>();
 
 			for (EquipmentModel model : modelDao.getEquipmentModelsList(
-					session, tx)) {
+					session)) {
 
 				models.put((int) model.getId(), model);
 			}
 
 			for (EquipmentStatus status : satatusDao.getEquipmentStatusesList(
-					session, tx)) {
+					session)) {
 
 				statuses.put((int) status.getId(), status);
 			}
 
 			for (EquipmentType type : typeDao
-					.getEquipmentTypesList(session, tx)) {
+					.getEquipmentTypesList(session)) {
 
 				types.put((int) type.getId(), type);
 			}
 
-			for (Location location : locationDao.getLocationsList(session, tx)) {
+			for (Location location : locationDao.getLocationsList(session)) {
 
 				locations.put((int) location.getId(), location);
 			}
 
-			for (Person person : personDao.getPersonsCroList(session, tx)) {
+			for (Person person : personDao.getPersonsCroList(session)) {
 
 				persons.put((int) person.getId(), person);
 			}
@@ -378,7 +377,7 @@ public class DebentureServiceImpl implements IDebentureService {
 				DebentureResponse debentureResponse = new DebentureResponse();
 
 				Equipment equipment = equipmentDao.getEquipmentById(
-						debenture.getIdEquipment(), session, tx);
+						debenture.getIdEquipment(), session);
 
 				if (equipment.getStatusId() != 2) {
 					continue;
@@ -410,7 +409,7 @@ public class DebentureServiceImpl implements IDebentureService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null)
+			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw e;
 		} finally {
